@@ -6,7 +6,7 @@ using namespace std;
 class utl {
  public:
   utl(string url, string key) : m_url(url), m_key(key) {}
-  const json post(json&);
+  const json post(json);
 
  private:
   const cpr::Url m_url;
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
   cout << "Transaction " << l_utl.post(ls_body);
   return 0;
 }
-const json utl::post(json& i_json) {
+const json utl::post(json i_json) {
   i_json["key"] = m_key;
   auto lPost = cpr::Post(m_url, cpr::Body{i_json.dump()},
                          cpr::Header{{"Content-Type", "application/json"}});
