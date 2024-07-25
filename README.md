@@ -1,10 +1,10 @@
 # idena
 ## Build Ubuntu
 
-sudo apt update
-sudo apt upgrade
-sudo apt install git
-sudo apt install cmake
+sudo apt update  
+sudo apt upgrade  
+sudo apt install git  
+sudo apt install cmake  
 sudo apt install g++
 sudo apt-get install libssl-dev
 git clone https://github.com/tal1974/idena
