@@ -16,3 +16,9 @@ cmake ..
 cmake --build . --parallel
 ./idena_replenish http://127.0.0.1:9119 123apikey 10 2
 ```
+
+## Build Windows
+Building for Windows tested under Visual Studio. If you have trouble with the assembly, then check if you have a “Git for Windows” component.
+
+## Release 1.0
+App tested for Windows 10 64 bit. If start without parameters then help screen appear.
