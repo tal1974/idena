@@ -21,4 +21,4 @@ cmake --build . --parallel
 Building for Windows tested under Visual Studio. If you have trouble with the assembly, then check if you have a “Git for Windows” component.
 
 ## Release 1.0
-App tested for Windows 10 64 bit. If start without parameters then help screen appear.
+[App](https://github.com/tal1974/idena/releases/tag/1.0) tested for Windows 10 64 bit. If start without parameters then help screen appear.
