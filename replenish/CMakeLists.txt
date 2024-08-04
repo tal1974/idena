@@ -34,10 +34,13 @@ FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
 FetchContent_Declare(json GIT_REPOSITORY https://github.com/open-source-parsers/json
                          GIT_TAG v1.0.0)
 
+FetchContent_Declare(cli11 URL https://github.com/CLIUtils/CLI11/releases/download/v2.4.2/CLI11.hpp DOWNLOAD_NO_EXTRACT true)
+FetchContent_MakeAvailable(cli11)
+FetchContent_GetProperties(cli11 SOURCE_DIR cli11srcDirVar)
 FetchContent_MakeAvailable(cpr)
 FetchContent_MakeAvailable(json)
 FetchContent_GetProperties(json SOURCE_DIR jsonsrcDirVar)
 target_link_libraries(idena_replenish PRIVATE cpr::cpr)
-target_include_directories(idena_replenish PUBLIC "${jsonsrcDirVar}")
+target_include_directories(idena_replenish PUBLIC "${jsonsrcDirVar}" "${cli11srcDirVar}")
 # Включите подпроекты.
 #add_subdirectory ("replenish")

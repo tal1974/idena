@@ -5,3 +5,4 @@
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
 #include <cpr/cpr.h>
 #include "src/json.hpp"
+#include "CLI11.hpp"

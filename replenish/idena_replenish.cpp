@@ -14,15 +14,20 @@ class utl {
 };
 
 int main(int argc, char* argv[]) {
-  if (argc != 5) {
-    cout << "Usage: idena_replenish <address:port> <api.key> <min start "
-            "balance> <balance remain after replenish>"
-         << endl;
-    cout << "Example: idena_replenish http://127.0.0.1:9119 123apikey 10 2"
-         << endl;
-    return 0;
-  }
-  utl l_utl(argv[1], argv[2]);
+  CLI::App app{"Idena replenish"};
+  argv = app.ensure_utf8(argv);
+  std::string l_url = "http://127.0.0.1:9119", l_apikey;
+  app.add_option("-u,--url", l_url,
+                 "URL for node. Default is http://127.0.0.1:9119");
+  app.add_option("-a,--apikey", l_apikey, "API key for yours node.")
+      ->required();
+  int l_balthres = 10, l_balremain = 2;
+  app.add_option("-t,--threshold", l_balthres, "Balance threshold. Default 10");
+  app.add_option("-r,--remain", l_balremain,
+                 "Balance remain after stake replenish. Default 2");
+  CLI11_PARSE(app, argc, argv);
+
+  utl l_utl(l_url, l_apikey);
 
   auto ls_body =
       R"({"method":"dna_getCoinbaseAddr","params":[],"id":1,"key":""})"_json;
@@ -32,11 +37,11 @@ int main(int argc, char* argv[]) {
   ls_body["params"][0] = l_addr;
   double replenish_sum = stod(string(l_utl.post(ls_body)["result"]["balance"]));
   cout << "Balance is " << replenish_sum << endl;
-  if (replenish_sum < stod(argv[3])) {
-    cout << "Balance is less than " << argv[3] << endl;
+  if (replenish_sum < l_balthres) {
+    cout << "Balance is less than " << l_balthres << endl;
     return 0;
   }
-  replenish_sum -= stod(argv[4]);
+  replenish_sum -= l_balremain;
   ls_body =
       R"({"method":"dna_sendTransaction","params":[{"type":22,"from":"","to":"","amount":0}],"id":1,"key":""})"_json;
   ls_body["params"][0]["from"] = l_addr;
